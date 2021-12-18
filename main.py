@@ -1,12 +1,15 @@
 from dotenv import load_dotenv
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 import os
+import smtplib
 
 load_dotenv()
 app = Flask(__name__)
 
 blog_url = os.environ["BLOG_API"]
+my_email = os.environ["MY_EMAIL"]
+my_password = os.environ["PASSWORD"]
 
 response = requests.get(url=blog_url)
 all_blog_posts = response.json()
@@ -22,9 +25,18 @@ def about():
     return render_template("about.html")
 
 
-@app.route('/contact')
+@app.route('/contact', methods=['POST', 'GET'])
 def contact():
-    return render_template("contact.html")
+    if request.method == 'POST':
+        with smtplib.SMTP("smtp.gmail.com") as connection:
+            connection.starttls()  # make the connection secure
+            connection.login(user=my_email, password=my_password)
+            connection.sendmail(from_addr="", to_addrs=my_email,
+                                msg=f"Subject:I want to contact\n\n{request.form['message']}\n"
+                                    f"{request.form['name']}\n{request.form['email']}\n{request.form['phone']}\n")
+        return render_template("contact.html", used_method='post')
+    else:
+        return render_template("contact.html", used_method='get')
 
 
 @app.route('/post/<int:post_id>')
