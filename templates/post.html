@@ -5,17 +5,17 @@
     <body>
         {% include 'header.html' %}
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url({{ url_for('static', filename=requested_post.image_url) }})">
+        <header class="masthead" style="background-image: url({{ post.img_url }})">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="post-heading">
-                            <h1>{{ requested_post.title }}</h1>
-                            <h2 class="subheading">{{ requested_post.subtitle }}</h2>
+                            <h1>{{ post.title }}</h1>
+                            <h2 class="subheading">{{ post.subtitle }}</h2>
                             <span class="meta">
                                 Posted by
-                                <a href="#!">{{ requested_post.author }}</a>
-                                on {{ requested_post.date }}
+                                <a href="#!">{{ post.author }}</a>
+                                on {{ post.date }}
                             </span>
                         </div>
                     </div>
@@ -27,9 +27,10 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <p>{{ requested_post.body }}</p>
+                        <p>{{ post.body|safe  }}</p>
                     </div>
                 </div>
+                <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{{ url_for('edit_post', post_id=post.id) }}">Edit Post →</a></div>
             </div>
         </article>
         {% include 'footer.html' %}

@@ -1,0 +1,8 @@
+python-dotenv~=0.19.1
+Flask~=2.0.2
+WTForms~=3.0.0
+Flask-SQLAlchemy~=2.5.1
+Flask-Bootstrap~=3.3.7.1
+Flask-WTF~=1.0.0
+Flask-CKEditor~=0.4.6
+SQLAlchemy-Utils==0.38.2

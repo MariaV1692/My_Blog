@@ -8,14 +8,6 @@ Rename the .env.example file to .env and change the values
 ```bash
  cp .env.example .env
 ```
-In the .env file:
-
-```python
-# yuor blog posts API url
-BLOG_API="https://api.npoint.io/individual_number"
-# your blog posts npoint editable url
-BLOG_EDIT="https://www.npoint.io/docs/individual_number"
-```
 
 ## Usage
 
